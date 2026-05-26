@@ -5,7 +5,7 @@ const courses = [
     id: 'cocina',
     path: '/cocina',
     emoji: '🍳',
-    title: 'Perímetros y Áreas en la Cocina',
+    title: 'Cocina',
     subject: 'Matemáticas aplicadas',
     description: 'Aprende geometría calculando perímetros y áreas usando contextos culinarios: pizzas, bandejas, moldes y más.',
     tags: ['Perímetro', 'Área', 'Geometría'],
