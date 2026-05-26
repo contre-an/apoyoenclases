@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manual de Estudio — Perímetros y Áreas en la Cocina</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #E65100;
+    --blue: #1565C0;
+    --green: #2E7D32;
+    --purple: #6A1B9A;
+    --teal: #00695C;
+    --red: #C62828;
+    --gold: #F9A825;
+    --light: #FFF8F0;
+    --border: #E0D0C0;
+  }
+
+  body {
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+    color: #1A1A2E;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ===== PRINT BUTTON ===== */
+  .print-bar {
+    background: var(--orange);
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .print-bar h3 { font-weight: 800; font-size: 1rem; }
+  .print-btn {
+    background: white;
+    color: var(--orange);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .print-btn:hover { background: #FFF3E0; }
+
+  /* ===== PAGE ===== */
+  .page {
+    background: white;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 48px 52px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    border-radius: 4px;
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    text-align: center;
+    padding: 60px 40px;
+    border-bottom: 3px solid var(--border);
+    margin-bottom: 40px;
+  }
+  .cover-emoji { font-size: 4rem; margin-bottom: 12px; }
+  .cover-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .cover-subtitle {
+    font-size: 1.1rem;
+    color: #5C5C7A;
+    margin-bottom: 24px;
+  }
+  .cover-meta {
+    display: inline-block;
+    background: var(--light);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    line-height: 2;
+  }
+  .cover-meta strong { color: var(--orange); }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 36px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ===== CONCEPT BOX ===== */
+  .concept-box {
+    background: var(--light);
+    border-left: 5px solid var(--orange);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  .concept-box strong { color: var(--orange); font-size: 1rem; }
+
+  /* ===== SHAPE CARD ===== */
+  .shape-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    page-break-inside: avoid;
+  }
+  .shape-card-header {
+    padding: 12px 18px;
+    color: white;
+    font-weight: 900;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .shape-card-body {
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .shape-card-body.single { grid-template-columns: 1fr; }
+
+  /* ===== FORMULA BOX ===== */
+  .formula-block {
+    background: #F3F4F6;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .formula-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #6B7280;
+    margin-bottom: 6px;
+  }
+  .formula {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1A1A2E;
+    line-height: 1.6;
+  }
+  .formula .var { color: var(--blue); font-style: italic; }
+  .formula .op { color: var(--orange); }
+
+  /* ===== EXAMPLE BOX ===== */
+  .example-block {
+    background: #E8F5E9;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border-left: 4px solid var(--green);
+  }
+  .example-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+  .example-text { font-size: 0.9rem; line-height: 1.7; }
+  .example-text .step { color: #1B5E20; font-weight: 700; }
+  .example-text .result {
+    background: var(--green);
+    color: white;
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-weight: 800;
+  }
+
+  /* ===== SHAPE SVG ===== */
+  .shape-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  /* ===== COMPONENTS LEGEND ===== */
+  .components {
+    font-size: 0.82rem;
+    color: #5C5C7A;
+    margin-top: 6px;
+    line-height: 1.7;
+  }
+  .components .sym { color: var(--blue); font-weight: 700; }
+
+  /* ===== SUMMARY TABLE ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 12px;
+  }
+  th {
+    background: var(--orange);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 800;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:nth-child(even) td { background: #FAFAFA; }
+  tr:hover td { background: #FFF3E0; }
+  .formula-cell { font-weight: 700; color: var(--blue); font-size: 0.9rem; }
+
+  /* ===== PRACTICE ===== */
+  .practice-box {
+    background: #EDE7F6;
+    border-left: 5px solid var(--purple);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+  }
+  .practice-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--purple);
+    margin-bottom: 6px;
+  }
+  .practice-text { font-size: 0.9rem; line-height: 1.7; }
+  .answer-space {
+    margin-top: 8px;
+    border-bottom: 1.5px dashed #9C88BF;
+    height: 28px;
+  }
+
+  /* ===== KEY CONCEPTS ===== */
+  .key-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .key-card {
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+  }
+  .key-card h4 { font-weight: 900; margin-bottom: 4px; }
+  .key-card p { font-size: 0.88rem; color: #5C5C7A; }
+
+  /* ===== PAGE BREAK ===== */
+  .page-break { page-break-before: always; padding-top: 40px; }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .print-bar { display: none; }
+    .page { max-width: 100%; margin: 0; padding: 20px 28px; box-shadow: none; border-radius: 0; }
+    .shape-card { page-break-inside: avoid; }
+    .cover { padding: 30px 20px; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <h3>📄 Manual de Estudio — Perímetros y Áreas en la Cocina</h3>
+  <button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- PORTADA -->
+  <div class="cover">
+    <div class="cover-emoji">🍳📐</div>
+    <div class="cover-title">Perímetros y Áreas<br>en la Cocina</div>
+    <div class="cover-subtitle">Manual de Estudio — Geometría Plana Aplicada</div>
+    <div class="cover-meta">
+      <strong>Instructor:</strong> Carlos Contreras<br>
+      <strong>Asignatura:</strong> Matemáticas<br>
+      <strong>Tema:</strong> Geometría — Perímetros y Áreas<br>
+      <strong>Nivel:</strong> Formación Técnica
+    </div>
+  </div>
+
+  <!-- CONCEPTOS CLAVE -->
+  <div class="section-title" style="background: var(--orange);">🎯 Conceptos Fundamentales</div>
+
+  <div class="key-grid">
+    <div class="key-card" style="border-color: var(--orange);">
+      <h4 style="color: var(--orange);">📏 ¿Qué es el Perímetro?</h4>
+      <p>Es la <strong>distancia total alrededor</strong> de una figura geométrica. Se mide en unidades lineales: <strong>cm, m, km</strong>.</p>
+      <p style="margin-top:6px; font-style:italic; font-size:0.82rem;">🍕 Ejemplo: el borde de una pizza es su perímetro (circunferencia).</p>
+    </div>
+    <div class="key-card" style="border-color: var(--purple);">
+      <h4 style="color: var(--purple);">📐 ¿Qué es el Área?</h4>
+      <p>Es la <strong>superficie interior</strong> de una figura. Se mide en unidades cuadradas: <strong>cm², m², km²</strong>.</p>
+      <p style="margin-top:6px; font-style:italic; font-size:0.82rem;">🍕 Ejemplo: la cantidad de queso que cubre la pizza es su área.</p>
+    </div>
+  </div>
+
+  <div class="concept-box">
+    <strong>⚠️ Diferencia clave:</strong> El perímetro mide el <em>contorno</em> (una línea) y el área mide la <em>superficie</em> (una región). Por eso tienen unidades distintas: cm vs cm².
+  </div>
+
+  <!-- ══════════════ SECCIÓN PERÍMETRO ══════════════ -->
+  <div class="section-title" style="background: #0D47A1;">📏 PERÍMETRO — Figuras y Fórmulas</div>
+
+  <!-- CÍRCULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--red);">
+      🍕 Círculo (Circunferencia)
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro (circunferencia)</div>
+          <div class="formula">
+            C = 2 × <span class="var">π</span> × <span class="var">r</span>
+            &nbsp;&nbsp;<span style="color:#6B7280; font-weight:400">ó</span>&nbsp;&nbsp;
+            C = <span class="var">π</span> × <span class="var">d</span>
+          </div>
+          <div class="components">
+            <span class="sym">π</span> ≈ 3.14159 &nbsp;|&nbsp;
+            <span class="sym">r</span> = radio &nbsp;|&nbsp;
+            <span class="sym">d</span> = diámetro = 2r
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#C62828" stroke-width="3" stroke-dasharray="6 3"/>
+            <line x1="60" y1="60" x2="110" y2="60" stroke="#1565C0" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="3" fill="#C62828"/>
+            <text x="82" y="55" font-size="13" font-weight="bold" fill="#1565C0" font-family="Nunito,sans-serif">r</text>
+            <text x="45" y="118" font-size="11" fill="#C62828" font-family="Nunito,sans-serif" font-weight="700">C = borde</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍕 Ejemplo — Borde de pizza</div>
+        <div class="example-text">
+          Una pizza tiene radio de <strong>15 cm</strong>. ¿Cuánto mide su borde?<br><br>
+          <span class="step">Dato:</span> r = 15 cm, π ≈ 3.14<br>
+          <span class="step">Fórmula:</span> C = 2 × π × r<br>
+          <span class="step">Reemplazar:</span> C = 2 × 3.14 × 15<br>
+          <span class="step">Operar:</span> C = 6.28 × 15<br>
+          <span class="step">Resultado:</span> C = <span class="result">94.2 cm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECTÁNGULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--blue);">
+      🍳 Rectángulo
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro</div>
+          <div class="formula">
+            P = 2 × (<span class="var">l</span> + <span class="var">a</span>)
+          </div>
+          <div class="components">
+            <span class="sym">l</span> = largo &nbsp;|&nbsp;
+            <span class="sym">a</span> = ancho
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="150" height="90" viewBox="0 0 150 90">
+            <rect x="10" y="15" width="130" height="60" fill="none" stroke="#1565C0" stroke-width="3"/>
+            <text x="65" y="10" font-size="12" fill="#1565C0" font-weight="700" font-family="Nunito,sans-serif">l = largo</text>
+            <text x="120" y="50" font-size="12" fill="#1565C0" font-weight="700" font-family="Nunito,sans-serif">a</text>
+            <text x="38" y="82" font-size="11" fill="#C62828" font-weight="700" font-family="Nunito,sans-serif">P = suma de todos los lados</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🔪 Ejemplo — Tabla de cortar</div>
+        <div class="example-text">
+          Una tabla de cortar mide <strong>40 cm × 25 cm</strong>. ¿Cuál es su perímetro?<br><br>
+          <span class="step">Dato:</span> l = 40 cm, a = 25 cm<br>
+          <span class="step">Fórmula:</span> P = 2 × (l + a)<br>
+          <span class="step">Reemplazar:</span> P = 2 × (40 + 25)<br>
+          <span class="step">Operar:</span> P = 2 × 65<br>
+          <span class="step">Resultado:</span> P = <span class="result">130 cm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUADRADO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: #00695C;">
+      ⬜ Cuadrado
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro</div>
+          <div class="formula">P = 4 × <span class="var">l</span></div>
+          <div class="components">
+            <span class="sym">l</span> = lado (todos los lados son iguales)
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <rect x="15" y="15" width="70" height="70" fill="none" stroke="#00695C" stroke-width="3"/>
+            <text x="42" y="12" font-size="12" fill="#00695C" font-weight="700" font-family="Nunito,sans-serif">l</text>
+            <text x="88" y="53" font-size="12" fill="#00695C" font-weight="700" font-family="Nunito,sans-serif">l</text>
+            <text x="42" y="97" font-size="12" fill="#00695C" font-weight="700" font-family="Nunito,sans-serif">l</text>
+            <text x="3" y="53" font-size="12" fill="#00695C" font-weight="700" font-family="Nunito,sans-serif">l</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🎂 Ejemplo — Pastel cuadrado</div>
+        <div class="example-text">
+          Un pastel cuadrado tiene lado de <strong>20 cm</strong>. ¿Cuánta cinta necesitas para su borde?<br><br>
+          <span class="step">Dato:</span> l = 20 cm<br>
+          <span class="step">Fórmula:</span> P = 4 × l<br>
+          <span class="step">Reemplazar:</span> P = 4 × 20<br>
+          <span class="step">Resultado:</span> P = <span class="result">80 cm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIÁNGULOS -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--orange);">
+      🧀 Triángulo
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro (cualquier triángulo)</div>
+          <div class="formula">P = <span class="var">a</span> + <span class="var">b</span> + <span class="var">c</span></div>
+          <div class="components">
+            <span class="sym">a, b, c</span> = longitud de cada lado
+          </div>
+        </div>
+        <div class="formula-block" style="margin-top:10px;">
+          <div class="formula-label">Tipos especiales</div>
+          <div class="formula" style="font-size:0.92rem;">
+            Equilátero: P = 3 × <span class="var">l</span><br>
+            Isósceles: P = 2<span class="var">l</span> + <span class="var">b</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍉 Ejemplo — Rebanada de sandía</div>
+        <div class="example-text">
+          Una rebanada triangular equilátero de sandía tiene lados de <strong>15 cm</strong>. ¿Cuál es su perímetro?<br><br>
+          <span class="step">Dato:</span> l = 15 cm (equilátero: 3 lados iguales)<br>
+          <span class="step">Fórmula:</span> P = 3 × l<br>
+          <span class="step">Reemplazar:</span> P = 3 × 15<br>
+          <span class="step">Resultado:</span> P = <span class="result">45 cm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAPECIO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: #6A1B9A;">
+      🍰 Trapecio
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro</div>
+          <div class="formula">P = <span class="var">a</span> + <span class="var">b</span> + <span class="var">c</span> + <span class="var">d</span></div>
+          <div class="components">
+            <span class="sym">a, b</span> = bases (paralelas) &nbsp;|&nbsp;
+            <span class="sym">c, d</span> = lados laterales
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:8px;">
+          <svg width="150" height="80" viewBox="0 0 150 80">
+            <polygon points="30,65 120,65 100,15 50,15" fill="none" stroke="#6A1B9A" stroke-width="3"/>
+            <text x="65" y="12" font-size="11" fill="#6A1B9A" font-weight="700" font-family="Nunito,sans-serif">b (base menor)</text>
+            <text x="55" y="78" font-size="11" fill="#6A1B9A" font-weight="700" font-family="Nunito,sans-serif">a (base mayor)</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍰 Ejemplo — Molde trapezoidal</div>
+        <div class="example-text">
+          Un molde tiene lados: base mayor <strong>30 cm</strong>, base menor <strong>18 cm</strong>, lados laterales <strong>12 cm</strong> y <strong>14 cm</strong>.<br><br>
+          <span class="step">Fórmula:</span> P = a + b + c + d<br>
+          <span class="step">Reemplazar:</span> P = 30 + 18 + 12 + 14<br>
+          <span class="step">Resultado:</span> P = <span class="result">74 cm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POLÍGONO REGULAR -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: #00838F;">
+      ⬡ Polígono Regular
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro</div>
+          <div class="formula">P = <span class="var">n</span> × <span class="var">l</span></div>
+          <div class="components">
+            <span class="sym">n</span> = número de lados &nbsp;|&nbsp;
+            <span class="sym">l</span> = longitud de cada lado (todos iguales)
+          </div>
+        </div>
+        <div style="margin-top:10px; font-size:0.82rem; color:#5C5C7A; line-height:1.8;">
+          <strong>Ejemplos:</strong><br>
+          Triángulo equil. (n=3): P = 3l<br>
+          Cuadrado (n=4): P = 4l<br>
+          Pentágono (n=5): P = 5l<br>
+          Hexágono (n=6): P = 6l
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍯 Ejemplo — Panal hexagonal</div>
+        <div class="example-text">
+          Una galleta hexagonal tiene cada lado de <strong>5 cm</strong>. ¿Cuál es su perímetro?<br><br>
+          <span class="step">Dato:</span> n = 6 lados, l = 5 cm<br>
+          <span class="step">Fórmula:</span> P = n × l<br>
+          <span class="step">Reemplazar:</span> P = 6 × 5<br>
+          <span class="step">Resultado:</span> P = <span class="result">30 cm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SECCIÓN ÁREA ══════════════ -->
+  <div class="section-title page-break" style="background: #4A148C;">📐 ÁREA — Figuras y Fórmulas</div>
+
+  <!-- ÁREA CÍRCULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--red);">
+      🍕 Área del Círculo
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = <span class="var">π</span> × <span class="var">r</span>²</div>
+          <div class="components">
+            <span class="sym">π</span> ≈ 3.14 &nbsp;|&nbsp;
+            <span class="sym">r</span> = radio &nbsp;|&nbsp;
+            <span class="sym">r²</span> = radio × radio
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="#FFCDD2" stroke="#C62828" stroke-width="2.5"/>
+            <line x1="60" y1="60" x2="110" y2="60" stroke="#1565C0" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="3" fill="#C62828"/>
+            <text x="80" y="55" font-size="13" font-weight="bold" fill="#1565C0" font-family="Nunito,sans-serif">r</text>
+            <text x="25" y="115" font-size="11" fill="#C62828" font-weight="700" font-family="Nunito,sans-serif">A = superficie rellena</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍕 Ejemplo — Superficie de pizza</div>
+        <div class="example-text">
+          Una pizza tiene radio de <strong>15 cm</strong>. ¿Cuánta superficie tiene?<br><br>
+          <span class="step">Dato:</span> r = 15 cm, π ≈ 3.14<br>
+          <span class="step">Fórmula:</span> A = π × r²<br>
+          <span class="step">Paso 1:</span> r² = 15 × 15 = 225<br>
+          <span class="step">Paso 2:</span> A = 3.14 × 225<br>
+          <span class="step">Resultado:</span> A = <span class="result">706.5 cm²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA RECTÁNGULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--blue);">
+      🍳 Área del Rectángulo
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = <span class="var">l</span> × <span class="var">a</span></div>
+          <div class="components">
+            <span class="sym">l</span> = largo &nbsp;|&nbsp;
+            <span class="sym">a</span> = ancho
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="150" height="90" viewBox="0 0 150 90">
+            <rect x="10" y="15" width="130" height="60" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.5"/>
+            <text x="58" y="50" font-size="13" font-weight="bold" fill="#1565C0" font-family="Nunito,sans-serif">A = l × a</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍳 Ejemplo — Bandeja rectangular</div>
+        <div class="example-text">
+          Una bandeja mide <strong>45 cm × 30 cm</strong>. ¿Cuánto papel necesitas para cubrir el fondo?<br><br>
+          <span class="step">Dato:</span> l = 45 cm, a = 30 cm<br>
+          <span class="step">Fórmula:</span> A = l × a<br>
+          <span class="step">Reemplazar:</span> A = 45 × 30<br>
+          <span class="step">Resultado:</span> A = <span class="result">1350 cm²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA CUADRADO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: #00695C;">
+      ⬜ Área del Cuadrado
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = <span class="var">l</span>² &nbsp; (= <span class="var">l</span> × <span class="var">l</span>)</div>
+          <div class="components">
+            <span class="sym">l</span> = lado
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <rect x="10" y="10" width="80" height="80" fill="#B2DFDB" stroke="#00695C" stroke-width="2.5"/>
+            <text x="35" y="56" font-size="14" font-weight="bold" fill="#00695C" font-family="Nunito,sans-serif">l²</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">⬜ Ejemplo — Bandeja cuadrada</div>
+        <div class="example-text">
+          Una bandeja cuadrada para hornear tiene lado de <strong>30 cm</strong>. ¿Cuál es su área?<br><br>
+          <span class="step">Dato:</span> l = 30 cm<br>
+          <span class="step">Fórmula:</span> A = l²<br>
+          <span class="step">Reemplazar:</span> A = 30 × 30<br>
+          <span class="step">Resultado:</span> A = <span class="result">900 cm²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA TRIÁNGULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--orange);">
+      🧀 Área del Triángulo
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = (<span class="var">b</span> × <span class="var">h</span>) ÷ 2</div>
+          <div class="components">
+            <span class="sym">b</span> = base &nbsp;|&nbsp;
+            <span class="sym">h</span> = altura (perpendicular a la base)
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:8px;">
+          <svg width="130" height="100" viewBox="0 0 130 100">
+            <polygon points="65,10 10,90 120,90" fill="#FFE0B2" stroke="#E65100" stroke-width="2.5"/>
+            <line x1="65" y1="10" x2="65" y2="90" stroke="#1565C0" stroke-width="2" stroke-dasharray="4 3"/>
+            <text x="70" y="58" font-size="11" fill="#1565C0" font-weight="700" font-family="Nunito,sans-serif">h</text>
+            <text x="55" y="103" font-size="11" fill="#E65100" font-weight="700" font-family="Nunito,sans-serif">b = base</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍕 Ejemplo — Rebanada de pizza</div>
+        <div class="example-text">
+          Una rebanada triangular de pizza tiene base <strong>20 cm</strong> y altura <strong>15 cm</strong>. ¿Cuánta superficie tiene?<br><br>
+          <span class="step">Dato:</span> b = 20 cm, h = 15 cm<br>
+          <span class="step">Fórmula:</span> A = (b × h) ÷ 2<br>
+          <span class="step">Reemplazar:</span> A = (20 × 15) ÷ 2<br>
+          <span class="step">Paso 1:</span> A = 300 ÷ 2<br>
+          <span class="step">Resultado:</span> A = <span class="result">150 cm²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA TRAPECIO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: #6A1B9A;">
+      🍰 Área del Trapecio
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = (<span class="var">B</span> + <span class="var">b</span>) × <span class="var">h</span> ÷ 2</div>
+          <div class="components">
+            <span class="sym">B</span> = base mayor &nbsp;|&nbsp;
+            <span class="sym">b</span> = base menor &nbsp;|&nbsp;
+            <span class="sym">h</span> = altura
+          </div>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🍰 Ejemplo — Molde trapezoidal</div>
+        <div class="example-text">
+          Un molde tiene base mayor <strong>30 cm</strong>, base menor <strong>18 cm</strong> y altura <strong>10 cm</strong>.<br><br>
+          <span class="step">Fórmula:</span> A = (B + b) × h ÷ 2<br>
+          <span class="step">Reemplazar:</span> A = (30 + 18) × 10 ÷ 2<br>
+          <span class="step">Paso 1:</span> A = 48 × 10 ÷ 2<br>
+          <span class="step">Paso 2:</span> A = 480 ÷ 2<br>
+          <span class="step">Resultado:</span> A = <span class="result">240 cm²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ TABLA RESUMEN ══════════════ -->
+  <div class="section-title page-break" style="background: #1B5E20;">📊 Tabla Resumen — Todas las Fórmulas</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Figura</th>
+        <th>Perímetro / Circunferencia</th>
+        <th>Área</th>
+        <th>Donde...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🍕 <strong>Círculo</strong></td>
+        <td class="formula-cell">C = 2 × π × r</td>
+        <td class="formula-cell">A = π × r²</td>
+        <td>r = radio, π ≈ 3.14</td>
+      </tr>
+      <tr>
+        <td>⬜ <strong>Cuadrado</strong></td>
+        <td class="formula-cell">P = 4 × l</td>
+        <td class="formula-cell">A = l²</td>
+        <td>l = lado</td>
+      </tr>
+      <tr>
+        <td>🍳 <strong>Rectángulo</strong></td>
+        <td class="formula-cell">P = 2 × (l + a)</td>
+        <td class="formula-cell">A = l × a</td>
+        <td>l = largo, a = ancho</td>
+      </tr>
+      <tr>
+        <td>🧀 <strong>Triángulo</strong></td>
+        <td class="formula-cell">P = a + b + c</td>
+        <td class="formula-cell">A = (b × h) ÷ 2</td>
+        <td>a,b,c = lados; h = altura</td>
+      </tr>
+      <tr>
+        <td>🧀 <strong>Triáng. equilátero</strong></td>
+        <td class="formula-cell">P = 3 × l</td>
+        <td class="formula-cell">A = (√3 × l²) ÷ 4</td>
+        <td>l = lado igual</td>
+      </tr>
+      <tr>
+        <td>🍰 <strong>Trapecio</strong></td>
+        <td class="formula-cell">P = a + b + c + d</td>
+        <td class="formula-cell">A = (B + b) × h ÷ 2</td>
+        <td>B = base mayor, b = base menor</td>
+      </tr>
+      <tr>
+        <td>⬡ <strong>Polígono regular</strong></td>
+        <td class="formula-cell">P = n × l</td>
+        <td class="formula-cell">A = (P × ap) ÷ 2</td>
+        <td>n = lados, ap = apotema</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="concept-box" style="margin-top: 20px;">
+    <strong>💡 Truco para recordar:</strong><br>
+    • <strong>Perímetro</strong> = rodear (como poner cinta en el borde) → unidades simples: <strong>cm</strong><br>
+    • <strong>Área</strong> = rellenar (como cubrir con papel el fondo) → unidades cuadradas: <strong>cm²</strong>
+  </div>
+
+  <!-- ══════════════ EJERCICIOS DE PRÁCTICA ══════════════ -->
+  <div class="section-title" style="background: var(--purple);">✏️ Ejercicios de Práctica</div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 1 — Círculo (Perímetro)</div>
+    <div class="practice-text">
+      Un molde circular para torta tiene un radio de <strong>18 cm</strong>. ¿Cuánto papel de aluminio necesitas para rodear todo su borde? (π ≈ 3.14)
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 2 — Rectángulo (Área)</div>
+    <div class="practice-text">
+      Una bandeja rectangular de horno mide <strong>50 cm × 35 cm</strong>. ¿Cuánto papel mantequilla necesitas para cubrir exactamente su fondo?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 3 — Triángulo (Perímetro + Área)</div>
+    <div class="practice-text">
+      Una rebanada triangular de queso tiene lados de <strong>12 cm, 15 cm y 9 cm</strong>, y una altura de <strong>7.2 cm</strong> sobre la base de 15 cm.<br>
+      a) ¿Cuál es su perímetro?<br>
+      b) ¿Cuál es su área?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 4 — Desafío Mixto</div>
+    <div class="practice-text">
+      Un chef tiene <strong>94.2 cm</strong> de cinta para decorar el borde de una pizza circular. (π ≈ 3.14)<br>
+      a) ¿Cuál es el radio de la pizza?<br>
+      b) ¿Cuánta superficie tiene esa pizza?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 5 — Polígono Regular</div>
+    <div class="practice-text">
+      Una galleta en forma de hexágono regular (6 lados iguales) tiene cada lado de <strong>4 cm</strong>. ¿Cuánto mide el contorno total de la galleta?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <div style="margin-top:48px; padding-top:20px; border-top: 2px solid var(--border); text-align:center; color:#9CA3AF; font-size:0.82rem;">
+    <strong style="color:var(--orange);">🍳 Perímetros y Áreas en la Cocina</strong> &nbsp;·&nbsp;
+    Instructor: Carlos Contreras &nbsp;·&nbsp; Matemáticas<br>
+    Material de uso educativo — Formación Técnica
+  </div>
+
+</div>
+
+</body>
+</html>
