@@ -802,6 +802,11 @@ body {
   padding: 16px 24px 24px;
   display: flex;
   justify-content: flex-end;
+  position: sticky;
+  bottom: 0;
+  background: white;
+  border-top: 1px solid #EDF2F7;
+  z-index: 1;
 }
 
 /* ===== FINAL SCREEN ===== */
