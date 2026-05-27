@@ -6,7 +6,10 @@ import GameBoard from '../components/GameBoard';
 import QuestionModal from '../components/QuestionModal';
 import FinalScreen from '../components/FinalScreen';
 
-const TEAM_COLORS = ['#E53935', '#1976D2', '#F57C00', '#6A1B9A', '#00838F', '#558B2F'];
+const TEAM_COLORS = [
+  '#E53935', '#1976D2', '#F57C00', '#6A1B9A', '#00838F', '#558B2F',
+  '#D81B60', '#00695C', '#F9A825', '#283593', '#BF360C', '#37474F',
+];
 const MAX_LIFELINES = 2;
 
 export default function Pecuarias() {

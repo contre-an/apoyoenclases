@@ -24,7 +24,6 @@ export default function SetupScreen({ onStart, teamColors }) {
   };
 
   const addTeam = () => {
-    if (teams.length >= 6) return;
     setTeams((prev) => [...prev, EMPTY_TEAM()]);
   };
 
@@ -53,7 +52,7 @@ export default function SetupScreen({ onStart, teamColors }) {
     <div className="setup-screen">
       <div className="setup-title">
         <h2>👨‍🍳 Configura los Equipos</h2>
-        <p>Mínimo 2 equipos · 4 integrantes por equipo · Máximo 6 equipos</p>
+        <p>Mínimo 2 equipos · 4 integrantes por equipo</p>
       </div>
 
       <div className="teams-grid">
@@ -115,11 +114,9 @@ export default function SetupScreen({ onStart, teamColors }) {
       {error && <p className="validation-msg">⚠️ {error}</p>}
 
       <div className="setup-actions">
-        {teams.length < 6 && (
-          <button className="btn btn-secondary" onClick={addTeam}>
-            + Agregar equipo
-          </button>
-        )}
+        <button className="btn btn-secondary" onClick={addTeam}>
+          + Agregar equipo
+        </button>
         <button className="btn btn-primary btn-lg" onClick={handleStart}>
           🚀 ¡Comenzar el juego!
         </button>
