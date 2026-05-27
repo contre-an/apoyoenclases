@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manual de Estudio — Perímetros y Áreas en la Gestión Pecuaria</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green:  #2E7D32;
+    --dgreen: #1B5E20;
+    --brown:  #5D4037;
+    --blue:   #1565C0;
+    --purple: #6A1B9A;
+    --teal:   #00695C;
+    --amber:  #E65100;
+    --light:  #F1F8F1;
+    --border: #C8E6C9;
+  }
+
+  body {
+    font-family: 'Nunito', 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+    color: #1A1A2E;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ===== PRINT BAR ===== */
+  .print-bar {
+    background: var(--green);
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .print-bar h3 { font-weight: 800; font-size: 1rem; }
+  .print-btn {
+    background: white;
+    color: var(--green);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .print-btn:hover { background: #E8F5E9; }
+
+  /* ===== PAGE ===== */
+  .page {
+    background: white;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 48px 52px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    border-radius: 4px;
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    text-align: center;
+    padding: 60px 40px;
+    border-bottom: 3px solid var(--border);
+    margin-bottom: 40px;
+  }
+  .cover-emoji { font-size: 4rem; margin-bottom: 12px; }
+  .cover-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .cover-subtitle { font-size: 1.1rem; color: #5C5C7A; margin-bottom: 24px; }
+  .cover-meta {
+    display: inline-block;
+    background: var(--light);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    line-height: 2;
+  }
+  .cover-meta strong { color: var(--green); }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 36px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ===== CONCEPT BOX ===== */
+  .concept-box {
+    background: var(--light);
+    border-left: 5px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  .concept-box strong { color: var(--green); font-size: 1rem; }
+
+  /* ===== SHAPE CARD ===== */
+  .shape-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    page-break-inside: avoid;
+  }
+  .shape-card-header {
+    padding: 12px 18px;
+    color: white;
+    font-weight: 900;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .shape-card-body {
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .shape-card-body.single { grid-template-columns: 1fr; }
+
+  /* ===== FORMULA BOX ===== */
+  .formula-block {
+    background: #F3F4F6;
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .formula-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #6B7280;
+    margin-bottom: 6px;
+  }
+  .formula {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1A1A2E;
+    line-height: 1.6;
+  }
+  .formula .var { color: var(--blue); font-style: italic; }
+  .formula .op  { color: var(--green); }
+
+  /* ===== EXAMPLE BOX ===== */
+  .example-block {
+    background: #E8F5E9;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border-left: 4px solid var(--green);
+  }
+  .example-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+  .example-text { font-size: 0.9rem; line-height: 1.7; }
+  .example-text .step { color: var(--dgreen); font-weight: 700; }
+  .example-text .result {
+    background: var(--green);
+    color: white;
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-weight: 800;
+  }
+
+  /* ===== SHAPE SVG ===== */
+  .shape-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  /* ===== COMPONENTS LEGEND ===== */
+  .components {
+    font-size: 0.82rem;
+    color: #5C5C7A;
+    margin-top: 6px;
+    line-height: 1.7;
+  }
+  .components .sym { color: var(--blue); font-weight: 700; }
+
+  /* ===== SUMMARY TABLE ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 12px;
+  }
+  th {
+    background: var(--green);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 800;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:nth-child(even) td { background: #FAFAFA; }
+  tr:hover td { background: #E8F5E9; }
+  .formula-cell { font-weight: 700; color: var(--blue); font-size: 0.9rem; }
+
+  /* ===== PRACTICE ===== */
+  .practice-box {
+    background: #EDE7F6;
+    border-left: 5px solid var(--purple);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+  }
+  .practice-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--purple);
+    margin-bottom: 6px;
+  }
+  .practice-text { font-size: 0.9rem; line-height: 1.7; }
+  .answer-space {
+    margin-top: 8px;
+    border-bottom: 1.5px dashed #9C88BF;
+    height: 28px;
+  }
+
+  /* ===== KEY CONCEPTS ===== */
+  .key-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .key-card {
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+  }
+  .key-card h4 { font-weight: 900; margin-bottom: 4px; }
+  .key-card p  { font-size: 0.88rem; color: #5C5C7A; }
+
+  /* ===== PAGE BREAK ===== */
+  .page-break { page-break-before: always; padding-top: 40px; }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .print-bar { display: none; }
+    .page { max-width: 100%; margin: 0; padding: 20px 28px; box-shadow: none; border-radius: 0; }
+    .shape-card { page-break-inside: avoid; }
+    .cover { padding: 30px 20px; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <h3>📄 Manual de Estudio — Perímetros y Áreas en la Gestión Pecuaria</h3>
+  <button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- PORTADA -->
+  <div class="cover">
+    <div class="cover-emoji">🐄📐</div>
+    <div class="cover-title">Perímetros y Áreas<br>en la Gestión Pecuaria</div>
+    <div class="cover-subtitle">Manual de Estudio — Geometría Plana Aplicada</div>
+    <div class="cover-meta">
+      <strong>Instructor:</strong> Carlos Contreras<br>
+      <strong>Asignatura:</strong> Matemáticas aplicadas · Zootecnia<br>
+      <strong>Tema:</strong> Geometría — Perímetros y Áreas<br>
+      <strong>Nivel:</strong> Formación Técnica Pecuaria
+    </div>
+  </div>
+
+  <!-- CONCEPTOS CLAVE -->
+  <div class="section-title" style="background: var(--green);">🎯 Conceptos Fundamentales</div>
+
+  <div class="key-grid">
+    <div class="key-card" style="border-color: var(--green);">
+      <h4 style="color: var(--green);">📏 ¿Qué es el Perímetro?</h4>
+      <p>Es la <strong>distancia total alrededor</strong> de una figura. Se mide en unidades lineales: <strong>m, km</strong>.</p>
+      <p style="margin-top:6px; font-style:italic; font-size:0.82rem;">🐄 Ejemplo: los metros de alambre para cercar un corral equivalen a su perímetro.</p>
+    </div>
+    <div class="key-card" style="border-color: var(--purple);">
+      <h4 style="color: var(--purple);">📐 ¿Qué es el Área?</h4>
+      <p>Es la <strong>superficie interior</strong> de una figura. Se mide en unidades cuadradas: <strong>m², ha</strong>.</p>
+      <p style="margin-top:6px; font-style:italic; font-size:0.82rem;">🐄 Ejemplo: los m² disponibles dentro de un corral determinan cuántos animales caben.</p>
+    </div>
+  </div>
+
+  <div class="concept-box">
+    <strong>⚠️ Diferencia clave:</strong> El perímetro mide el <em>contorno</em> (alambre, cerca) → unidades simples: <strong>m</strong>.
+    El área mide la <em>superficie</em> (espacio para animales) → unidades cuadradas: <strong>m²</strong> o hectáreas.
+  </div>
+
+  <div class="concept-box" style="border-color: var(--brown);">
+    <strong>🌿 Conversión importante:</strong> 1 hectárea (ha) = 10,000 m² (un cuadrado de 100 m × 100 m).
+    FEDEGAN usa hectáreas para medir potreros y calcular la carga animal (cabezas/ha).
+  </div>
+
+  <!-- ══════════════ SECCIÓN PERÍMETRO ══════════════ -->
+  <div class="section-title" style="background: #0D47A1;">📏 PERÍMETRO — Figuras y Fórmulas</div>
+
+  <!-- RECTÁNGULO - PERÍMETRO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--brown);">
+      🐄 Rectángulo — Corrales y Potreros
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro</div>
+          <div class="formula">
+            P = 2 × (<span class="var">l</span> + <span class="var">a</span>)
+          </div>
+          <div class="components">
+            <span class="sym">l</span> = largo &nbsp;|&nbsp;
+            <span class="sym">a</span> = ancho
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="160" height="90" viewBox="0 0 160 90">
+            <rect x="10" y="15" width="140" height="60" fill="none" stroke="#5D4037" stroke-width="3"/>
+            <text x="70" y="10" font-size="12" fill="#5D4037" font-weight="700" font-family="Nunito,sans-serif">l = largo</text>
+            <text x="128" y="50" font-size="12" fill="#5D4037" font-weight="700" font-family="Nunito,sans-serif">a</text>
+            <text x="20" y="83" font-size="11" fill="#C62828" font-weight="700" font-family="Nunito,sans-serif">P = suma de todos los lados</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🐄 Ejemplo — Corral bovino</div>
+        <div class="example-text">
+          Un corral mide <strong>12 m de largo y 8 m de ancho</strong>. ¿Cuántos metros de alambre se necesitan?<br><br>
+          <span class="step">Dato:</span> l = 12 m, a = 8 m<br>
+          <span class="step">Fórmula:</span> P = 2 × (l + a)<br>
+          <span class="step">Reemplazar:</span> P = 2 × (12 + 8)<br>
+          <span class="step">Operar:</span> P = 2 × 20<br>
+          <span class="step">Resultado:</span> P = <span class="result">40 m</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUADRADO - PERÍMETRO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--teal);">
+      🐷 Cuadrado — Corrales Cuadrados
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro</div>
+          <div class="formula">P = 4 × <span class="var">l</span></div>
+          <div class="components">
+            <span class="sym">l</span> = lado (todos los lados son iguales)
+          </div>
+        </div>
+        <div class="formula-block" style="margin-top:10px;">
+          <div class="formula-label">Si conoces el área, halla el lado primero</div>
+          <div class="formula">l = √<span class="var">A</span></div>
+          <div class="components">
+            <span class="sym">A</span> = área del corral &nbsp;|&nbsp; √ = raíz cuadrada
+          </div>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🐷 Ejemplo — Corral cuadrado para cerdas</div>
+        <div class="example-text">
+          Una cerda lactante necesita un corral cuadrado de <strong>5 m²</strong>. ¿Cuánto mide su perímetro?<br><br>
+          <span class="step">Dato:</span> A = 5 m²<br>
+          <span class="step">Paso 1:</span> l = √5 ≈ 2.24 m<br>
+          <span class="step">Fórmula:</span> P = 4 × l<br>
+          <span class="step">Reemplazar:</span> P = 4 × 2.24<br>
+          <span class="step">Resultado:</span> P ≈ <span class="result">8.94 m</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIÁNGULO - PERÍMETRO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--green);">
+      🌿 Triángulo — Potreros Irregulares
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del perímetro (cualquier triángulo)</div>
+          <div class="formula">P = <span class="var">a</span> + <span class="var">b</span> + <span class="var">c</span></div>
+          <div class="components">
+            <span class="sym">a, b, c</span> = longitud de cada lado
+          </div>
+        </div>
+        <div style="margin-top:10px; font-size:0.82rem; color:#5C5C7A; line-height:1.8;">
+          <strong>Regla general:</strong> Para cualquier polígono (figura de lados rectos), el perímetro es siempre la
+          <strong>suma de todos sus lados</strong>, sin importar cuántos sean.
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🌿 Ejemplo — Potrero triangular</div>
+        <div class="example-text">
+          Un potrero triangular tiene lados de <strong>300 m, 400 m y 500 m</strong>. ¿Cuántos metros de cerca necesita?<br><br>
+          <span class="step">Dato:</span> a = 300, b = 400, c = 500<br>
+          <span class="step">Fórmula:</span> P = a + b + c<br>
+          <span class="step">Reemplazar:</span> P = 300 + 400 + 500<br>
+          <span class="step">Resultado:</span> P = <span class="result">1,200 m</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CÍRCULO - PERÍMETRO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: #0277BD;">
+      🐟 Círculo — Estanques Circulares
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula de la circunferencia (perímetro del círculo)</div>
+          <div class="formula">
+            C = 2 × <span class="var">π</span> × <span class="var">r</span>
+            &nbsp;&nbsp;<span style="color:#6B7280; font-weight:400">ó</span>&nbsp;&nbsp;
+            C = <span class="var">π</span> × <span class="var">d</span>
+          </div>
+          <div class="components">
+            <span class="sym">π</span> ≈ 3.14 &nbsp;|&nbsp;
+            <span class="sym">r</span> = radio &nbsp;|&nbsp;
+            <span class="sym">d</span> = diámetro = 2r
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#0277BD" stroke-width="3" stroke-dasharray="6 3"/>
+            <line x1="60" y1="60" x2="110" y2="60" stroke="#1565C0" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="3" fill="#0277BD"/>
+            <text x="82" y="55" font-size="13" font-weight="bold" fill="#1565C0" font-family="Nunito,sans-serif">r</text>
+            <text x="35" y="118" font-size="11" fill="#0277BD" font-family="Nunito,sans-serif" font-weight="700">C = borde</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🐟 Ejemplo — Estanque de cachama</div>
+        <div class="example-text">
+          Un estanque circular tiene radio de <strong>7 m</strong>. ¿Cuántos metros de geotextil (borde) se necesitan?<br><br>
+          <span class="step">Dato:</span> r = 7 m, π ≈ 3.14<br>
+          <span class="step">Fórmula:</span> C = 2 × π × r<br>
+          <span class="step">Reemplazar:</span> C = 2 × 3.14 × 7<br>
+          <span class="step">Operar:</span> C = 6.28 × 7<br>
+          <span class="step">Resultado:</span> C = <span class="result">43.96 m</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SECCIÓN ÁREA ══════════════ -->
+  <div class="section-title page-break" style="background: #4A148C;">📐 ÁREA — Figuras y Fórmulas</div>
+
+  <!-- ÁREA RECTÁNGULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--brown);">
+      🐄 Área del Rectángulo — Corrales y Galpones
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = <span class="var">l</span> × <span class="var">a</span></div>
+          <div class="components">
+            <span class="sym">l</span> = largo &nbsp;|&nbsp;
+            <span class="sym">a</span> = ancho
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="150" height="90" viewBox="0 0 150 90">
+            <rect x="10" y="15" width="130" height="60" fill="#DCEDC8" stroke="#5D4037" stroke-width="2.5"/>
+            <text x="50" y="50" font-size="13" font-weight="bold" fill="#5D4037" font-family="Nunito,sans-serif">A = l × a</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🐔 Ejemplo — Galpón avícola</div>
+        <div class="example-text">
+          Un galpón mide <strong>50 m × 12 m</strong>. ¿Cuántos m² tiene? ¿Cuántos pollos caben si se alojan 10 aves/m²?<br><br>
+          <span class="step">Dato:</span> l = 50 m, a = 12 m<br>
+          <span class="step">Fórmula:</span> A = l × a<br>
+          <span class="step">Área:</span> A = 50 × 12 = <span class="result">600 m²</span><br>
+          <span class="step">Pollos:</span> 600 × 10 = <span class="result">6,000 aves</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA CUADRADO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--green);">
+      🌿 Área del Cuadrado — Potreros Cuadrados
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = <span class="var">l</span>² &nbsp; (= <span class="var">l</span> × <span class="var">l</span>)</div>
+          <div class="components">
+            <span class="sym">l</span> = lado
+          </div>
+        </div>
+        <div class="formula-block" style="margin-top:10px;">
+          <div class="formula-label">Si conoces el área, halla el lado</div>
+          <div class="formula">l = √<span class="var">A</span></div>
+        </div>
+        <div style="margin-top:10px; font-size:0.82rem; color:#5C5C7A; line-height:1.8;">
+          <strong>Conversión:</strong><br>
+          1 ha = 10,000 m²<br>
+          Para convertir ha → m²: multiplica por 10,000<br>
+          Para convertir m² → ha: divide entre 10,000
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🌿 Ejemplo — Potrero cuadrado (FEDEGAN)</div>
+        <div class="example-text">
+          Un potrero cuadrado tiene <strong>1 hectárea</strong>. ¿Cuánto mide cada lado?<br><br>
+          <span class="step">Dato:</span> A = 1 ha = 10,000 m²<br>
+          <span class="step">Fórmula:</span> l = √A<br>
+          <span class="step">Reemplazar:</span> l = √10,000<br>
+          <span class="step">Resultado:</span> l = <span class="result">100 m</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA CÍRCULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: #0277BD;">
+      🐟 Área del Círculo — Estanques Piscícolas
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = <span class="var">π</span> × <span class="var">r</span>²</div>
+          <div class="components">
+            <span class="sym">π</span> ≈ 3.14 &nbsp;|&nbsp;
+            <span class="sym">r</span> = radio &nbsp;|&nbsp;
+            <span class="sym">r²</span> = radio × radio
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:12px;">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="#B3E5FC" stroke="#0277BD" stroke-width="2.5"/>
+            <line x1="60" y1="60" x2="110" y2="60" stroke="#1565C0" stroke-width="2.5"/>
+            <circle cx="60" cy="60" r="3" fill="#0277BD"/>
+            <text x="80" y="55" font-size="13" font-weight="bold" fill="#1565C0" font-family="Nunito,sans-serif">r</text>
+            <text x="15" y="115" font-size="11" fill="#0277BD" font-weight="700" font-family="Nunito,sans-serif">A = superficie del agua</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🐟 Ejemplo — Estanque circular para cachama</div>
+        <div class="example-text">
+          Un estanque circular para cachama tiene radio de <strong>7 m</strong>. ¿Cuántos m² de espejo de agua tiene?<br><br>
+          <span class="step">Dato:</span> r = 7 m, π ≈ 3.14<br>
+          <span class="step">Fórmula:</span> A = π × r²<br>
+          <span class="step">Paso 1:</span> r² = 7 × 7 = 49<br>
+          <span class="step">Paso 2:</span> A = 3.14 × 49<br>
+          <span class="step">Resultado:</span> A = <span class="result">153.86 m²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREA TRIÁNGULO -->
+  <div class="shape-card">
+    <div class="shape-card-header" style="background: var(--amber);">
+      🌿 Área del Triángulo — Potreros Triangulares
+    </div>
+    <div class="shape-card-body">
+      <div>
+        <div class="formula-block">
+          <div class="formula-label">Fórmula del área</div>
+          <div class="formula">A = (<span class="var">b</span> × <span class="var">h</span>) ÷ 2</div>
+          <div class="components">
+            <span class="sym">b</span> = base &nbsp;|&nbsp;
+            <span class="sym">h</span> = altura (perpendicular a la base)
+          </div>
+        </div>
+        <div class="shape-diagram" style="margin-top:8px;">
+          <svg width="130" height="100" viewBox="0 0 130 100">
+            <polygon points="65,10 10,90 120,90" fill="#FFE0B2" stroke="#E65100" stroke-width="2.5"/>
+            <line x1="65" y1="10" x2="65" y2="90" stroke="#1565C0" stroke-width="2" stroke-dasharray="4 3"/>
+            <text x="70" y="58" font-size="11" fill="#1565C0" font-weight="700" font-family="Nunito,sans-serif">h</text>
+            <text x="50" y="103" font-size="11" fill="#E65100" font-weight="700" font-family="Nunito,sans-serif">b = base</text>
+          </svg>
+        </div>
+      </div>
+      <div class="example-block">
+        <div class="example-label">🌿 Ejemplo — Potrero triangular</div>
+        <div class="example-text">
+          Un potrero triangular tiene base <strong>400 m</strong> y altura <strong>250 m</strong>. ¿Cuántos m² tiene?<br><br>
+          <span class="step">Dato:</span> b = 400 m, h = 250 m<br>
+          <span class="step">Fórmula:</span> A = (b × h) ÷ 2<br>
+          <span class="step">Reemplazar:</span> A = (400 × 250) ÷ 2<br>
+          <span class="step">Paso 1:</span> A = 100,000 ÷ 2<br>
+          <span class="step">Resultado:</span> A = <span class="result">50,000 m² = 5 ha</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ TABLA RESUMEN ══════════════ -->
+  <div class="section-title page-break" style="background: var(--dgreen);">📊 Tabla Resumen — Todas las Fórmulas</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Figura</th>
+        <th>Perímetro / Circunferencia</th>
+        <th>Área</th>
+        <th>Donde...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>⬜ <strong>Cuadrado</strong></td>
+        <td class="formula-cell">P = 4 × l</td>
+        <td class="formula-cell">A = l²</td>
+        <td>l = lado</td>
+      </tr>
+      <tr>
+        <td>🐄 <strong>Rectángulo</strong></td>
+        <td class="formula-cell">P = 2 × (l + a)</td>
+        <td class="formula-cell">A = l × a</td>
+        <td>l = largo, a = ancho</td>
+      </tr>
+      <tr>
+        <td>🌿 <strong>Triángulo</strong></td>
+        <td class="formula-cell">P = a + b + c</td>
+        <td class="formula-cell">A = (b × h) ÷ 2</td>
+        <td>a,b,c = lados; h = altura</td>
+      </tr>
+      <tr>
+        <td>🐟 <strong>Círculo</strong></td>
+        <td class="formula-cell">C = 2 × π × r</td>
+        <td class="formula-cell">A = π × r²</td>
+        <td>r = radio, π ≈ 3.14</td>
+      </tr>
+      <tr>
+        <td>🌿 <strong>Polígono irregular</strong></td>
+        <td class="formula-cell">P = suma de todos los lados</td>
+        <td class="formula-cell">Dividir en rectángulos y triángulos</td>
+        <td>Suma las partes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="concept-box" style="margin-top: 20px;">
+    <strong>💡 Truco para recordar:</strong><br>
+    • <strong>Perímetro</strong> = metros de alambre para cercar → unidades simples: <strong>m</strong><br>
+    • <strong>Área</strong> = metros cuadrados para los animales → unidades cuadradas: <strong>m²</strong> o <strong>ha</strong>
+  </div>
+
+  <div class="concept-box" style="border-color: var(--brown);">
+    <strong>🐄 Estándares de bienestar animal (referencia):</strong><br>
+    • Bovino en establación: <strong>4–6 m²/animal</strong> (FAO / FEDEGAN)<br>
+    • Cerdo en engorde: <strong>0.74 m²/animal</strong> (ICA Colombia)<br>
+    • Pollo de engorde: <strong>10 aves/m²</strong> (ICA Colombia)<br>
+    • Gallina ponedora en piso: <strong>4 gallinas/m²</strong> (norma bienestar animal)<br>
+    • Cabra adulta: <strong>1.5–2 m²/animal</strong> (norma internacional)
+  </div>
+
+  <!-- ══════════════ EJERCICIOS ══════════════ -->
+  <div class="section-title" style="background: var(--purple);">✏️ Ejercicios de Práctica</div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 1 — Corral Rectangular (Perímetro)</div>
+    <div class="practice-text">
+      Un corral rectangular para vacas mide <strong>15 m de largo y 10 m de ancho</strong>. ¿Cuántos metros de alambre de púas se necesitan para cercarlo?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 2 — Galpón Avícola (Área)</div>
+    <div class="practice-text">
+      Un galpón rectangular de pollos de engorde mide <strong>40 m × 12 m</strong>. Si se pueden alojar 10 pollos por m², ¿cuántos pollos caben en el galpón?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 3 — Potrero FEDEGAN (Perímetro + Área)</div>
+    <div class="practice-text">
+      Un potrero rectangular mide <strong>200 m de largo y 100 m de ancho</strong>.<br>
+      a) ¿Cuántos metros de cerca necesita (perímetro)?<br>
+      b) ¿Cuántas hectáreas tiene el potrero?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 4 — Estanque Circular (Área y Circunferencia)</div>
+    <div class="practice-text">
+      Un estanque circular para tilapia tiene un radio de <strong>5 m</strong>. (π ≈ 3.14)<br>
+      a) ¿Cuántos metros de geotextil (perímetro) necesitas para el borde?<br>
+      b) ¿Cuántos m² de espejo de agua tiene el estanque?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-label">Ejercicio 5 — Desafío Mixto</div>
+    <div class="practice-text">
+      Un ganadero tiene un potrero cuadrado de <strong>2.25 hectáreas</strong>. Quiere cercarlo con <strong>4 hilos de alambre</strong>.<br>
+      a) ¿Cuántos metros cuadrados tiene el potrero?<br>
+      b) ¿Cuánto mide cada lado del potrero?<br>
+      c) ¿Cuántos metros de alambre necesita en total?
+    </div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+    <div class="answer-space"></div>
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <div style="margin-top:48px; padding-top:20px; border-top: 2px solid var(--border); text-align:center; color:#9CA3AF; font-size:0.82rem;">
+    <strong style="color:var(--green);">🐄 Perímetros y Áreas en la Gestión Pecuaria</strong> &nbsp;·&nbsp;
+    Instructor: Carlos Contreras &nbsp;·&nbsp; Matemáticas aplicadas · Zootecnia<br>
+    Material de uso educativo — Formación Técnica Pecuaria
+  </div>
+
+</div>
+
+</body>
+</html>

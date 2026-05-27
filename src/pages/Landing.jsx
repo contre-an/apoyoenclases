@@ -4,6 +4,7 @@ const courses = [
   {
     id: 'cocina',
     path: '/cocina',
+    manual: '/manual-estudio.html',
     emoji: '🍳',
     title: 'Cocina',
     subject: 'Matemáticas aplicadas',
@@ -16,6 +17,7 @@ const courses = [
   {
     id: 'pecuarias',
     path: '/pecuarias',
+    manual: '/manual-estudio-pecuarias.html',
     emoji: '🐄',
     title: 'Gestión de Empresas Pecuarias',
     subject: 'Matemáticas aplicadas · Zootecnia',
@@ -97,13 +99,24 @@ export default function Landing() {
 
               <div className="course-card-footer">
                 <span className="course-students">👥 {course.students} estudiantes</span>
-                <button
-                  className="course-btn"
-                  style={{ background: course.color }}
-                  onClick={() => navigate(course.path)}
-                >
-                  Entrar a la clase →
-                </button>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <a
+                    href={course.manual}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="course-btn"
+                    style={{ background: 'white', color: course.color, border: `2px solid ${course.color}`, textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
+                  >
+                    📄 Manual
+                  </a>
+                  <button
+                    className="course-btn"
+                    style={{ background: course.color }}
+                    onClick={() => navigate(course.path)}
+                  >
+                    Entrar a la clase →
+                  </button>
+                </div>
               </div>
             </div>
           ))}
