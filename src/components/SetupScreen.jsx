@@ -2,7 +2,13 @@ import { useState } from 'react';
 
 const EMPTY_TEAM = () => ({ name: '', members: ['', '', '', ''] });
 
-export default function SetupScreen({ onStart, teamColors }) {
+const DEFAULT_THEME = {
+  icon: '👨‍🍳',
+  title: 'Configura los Equipos',
+  teamPlaceholder: (i) => `Ej: Los Chefs ${i + 1}`,
+};
+
+export default function SetupScreen({ onStart, teamColors, theme = DEFAULT_THEME }) {
   const [teams, setTeams] = useState([EMPTY_TEAM(), EMPTY_TEAM()]);
   const [error, setError] = useState('');
 
@@ -51,7 +57,7 @@ export default function SetupScreen({ onStart, teamColors }) {
   return (
     <div className="setup-screen">
       <div className="setup-title">
-        <h2>👨‍🍳 Configura los Equipos</h2>
+        <h2>{theme.icon} {theme.title}</h2>
         <p>Mínimo 2 equipos · 4 integrantes por equipo</p>
       </div>
 
@@ -81,7 +87,7 @@ export default function SetupScreen({ onStart, teamColors }) {
             <input
               className="team-name-input"
               type="text"
-              placeholder={`Ej: Los Chefs ${i + 1}`}
+              placeholder={theme.teamPlaceholder(i)}
               value={team.name}
               onChange={(e) => updateTeamName(i, e.target.value)}
               maxLength={24}

@@ -94,7 +94,18 @@ export default function Pecuarias() {
         </span>
       </div>
 
-      {phase === 'setup' && <SetupScreen onStart={startGame} teamColors={TEAM_COLORS} maxLifelines={MAX_LIFELINES} />}
+      {phase === 'setup' && (
+        <SetupScreen
+          onStart={startGame}
+          teamColors={TEAM_COLORS}
+          maxLifelines={MAX_LIFELINES}
+          theme={{
+            icon: '🐄',
+            title: 'Configura los Equipos',
+            teamPlaceholder: (i) => `Ej: Los Ganaderos ${i + 1}`,
+          }}
+        />
+      )}
       {phase === 'game' && (
         <GameBoard categories={categoriesPecuarias} usedQuestions={usedQuestions} teams={teams} currentTeamIndex={currentTeamIndex} onSelectQuestion={selectQuestion} onReset={resetGame} />
       )}
