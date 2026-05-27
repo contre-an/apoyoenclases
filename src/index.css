@@ -1479,10 +1479,14 @@ body {
 .course-card-footer {
   padding: 14px 20px 18px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid #EDF2F7;
+  flex-direction: column;
   gap: 12px;
+  border-top: 1px solid #EDF2F7;
+}
+
+.course-card-actions {
+  display: flex;
+  gap: 8px;
 }
 
 .course-students {
@@ -1492,7 +1496,8 @@ body {
 }
 
 .course-btn {
-  padding: 9px 20px;
+  flex: 1;
+  padding: 9px 16px;
   border: none;
   border-radius: 50px;
   color: white;
@@ -1502,6 +1507,16 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  text-align: center;
+}
+
+.course-btn-outline {
+  background: white;
+  border: 2px solid;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .course-btn:hover {
@@ -1527,12 +1542,7 @@ body {
   .courses-grid {
     grid-template-columns: 1fr;
   }
-  .course-card-footer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
   .course-btn {
     width: 100%;
-    text-align: center;
   }
 }

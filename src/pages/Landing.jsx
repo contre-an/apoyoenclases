@@ -99,13 +99,13 @@ export default function Landing() {
 
               <div className="course-card-footer">
                 <span className="course-students">👥 {course.students} estudiantes</span>
-                <div style={{ display: 'flex', gap: 8 }}>
+                <div className="course-card-actions">
                   <a
                     href={course.manual}
                     target="_blank"
                     rel="noreferrer"
-                    className="course-btn"
-                    style={{ background: 'white', color: course.color, border: `2px solid ${course.color}`, textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
+                    className="course-btn course-btn-outline"
+                    style={{ color: course.color, borderColor: course.color }}
                   >
                     📄 Manual
                   </a>
