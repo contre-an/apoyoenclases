@@ -3,6 +3,7 @@ import { getTimerSeconds } from '../data/questions';
 export default function GameBoard({ categories, usedQuestions, teams, currentTeamIndex, onSelectQuestion, onReset }) {
   const currentTeam = teams[currentTeamIndex];
 
+  const poolCategories = categories.filter((c) => c.type === 'pool');
   const periCategories = categories.filter((c) => c.type === 'perimetro');
   const areaCategories = categories.filter((c) => c.type === 'area');
   const mixtoCategories = categories.filter((c) => c.type === 'mixto');
@@ -22,6 +23,11 @@ export default function GameBoard({ categories, usedQuestions, teams, currentTea
           style={{ gridTemplateColumns: `repeat(${categories.length}, 1fr)` }}
         >
           {/* Section header row */}
+          {poolCategories.length > 0 && (
+            <div className="section-header" style={{ gridColumn: `span ${poolCategories.length}`, background: '#37474F' }}>
+              🎲 BANCO DE PREGUNTAS
+            </div>
+          )}
           {periCategories.length > 0 && (
             <div className="section-header" style={{ gridColumn: `span ${periCategories.length}`, background: '#0D47A1' }}>
               📏 PERÍMETRO
@@ -50,7 +56,7 @@ export default function GameBoard({ categories, usedQuestions, teams, currentTea
             categories.map((cat) => {
               const q = cat.questions[rowIdx];
               const isUsed = usedQuestions.has(q.id);
-              const timerSec = getTimerSeconds(q.points);
+              const timerSec = q.timerOverride ?? getTimerSeconds(q.points);
               return (
                 <button
                   key={q.id}

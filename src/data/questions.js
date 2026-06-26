@@ -330,3 +330,289 @@ export const categories = [
 ];
 
 export const TOTAL_QUESTIONS = categories.reduce((sum, cat) => sum + cat.questions.length, 0);
+
+// ─── Preguntas adicionales del pool (5 por valor = 25 nuevas) ────────────────
+const extraQuestionsCocina = {
+  100: [
+    {
+      id: 'c100a', points: 100,
+      question: 'Una bandeja cuadrada tiene 20 cm de lado. ¿Cuánto mide su perímetro?',
+      context: '🍳 El chef necesita saber cuánta cinta decorativa poner alrededor de la bandeja',
+      options: ['80 cm', '40 cm', '400 cm', '20 cm'],
+      answer: 0,
+      hint: 'Perímetro de un cuadrado = 4 × lado = 4 × 20',
+      explanation: 'P = 4 × 20 = 80 cm de cinta decorativa.',
+    },
+    {
+      id: 'c100b', points: 100,
+      question: 'Un plato circular tiene radio de 10 cm. ¿Cuánto mide su circunferencia? (π ≈ 3.14)',
+      context: '🍽️ El cocinero quiere decorar el borde del plato con salsa',
+      options: ['62.8 cm', '31.4 cm', '314 cm', '125.6 cm'],
+      answer: 0,
+      hint: 'Circunferencia = 2 × π × r = 2 × 3.14 × 10',
+      explanation: 'C = 2 × 3.14 × 10 = 62.8 cm de borde.',
+    },
+    {
+      id: 'c100c', points: 100,
+      question: 'Una tabla de picar mide 30 cm de largo y 20 cm de ancho. ¿Cuánto mide su área?',
+      context: '🔪 El cocinero necesita saber cuánta superficie tiene para preparar ingredientes',
+      options: ['600 cm²', '100 cm', '300 cm²', '1,200 cm²'],
+      answer: 0,
+      hint: 'Área = largo × ancho = 30 × 20',
+      explanation: 'Área = 30 × 20 = 600 cm² de superficie de trabajo.',
+    },
+    {
+      id: 'c100d', points: 100,
+      question: 'Una bandeja de hornear mide 40 cm de largo y 30 cm de ancho. ¿Cuánto mide su área?',
+      context: '🧁 El pastelero necesita saber cuánta superficie tiene la bandeja de hornear',
+      options: ['1,200 cm²', '140 cm', '600 cm²', '2,400 cm²'],
+      answer: 0,
+      hint: 'Área = largo × ancho = 40 × 30',
+      explanation: 'Área = 40 × 30 = 1,200 cm² de superficie para hornear.',
+    },
+    {
+      id: 'c100e', points: 100,
+      question: 'Una sartén cuadrada tiene 25 cm de lado. ¿Cuánto mide su perímetro?',
+      context: '🍳 Las sartenes cuadradas son populares en cocinas profesionales',
+      options: ['100 cm', '50 cm', '625 cm', '25 cm'],
+      answer: 0,
+      hint: 'P = 4 × lado = 4 × 25',
+      explanation: 'P = 4 × 25 = 100 cm de contorno.',
+    },
+  ],
+  200: [
+    {
+      id: 'c200a', points: 200,
+      question: 'Un molde cuadrado tiene área de 400 cm². ¿Cuánto mide su perímetro?',
+      context: '🎂 Conocemos el área del molde cuadrado. Primero hallamos el lado y luego el perímetro',
+      options: ['80 cm', '20 cm', '40 cm', '160 cm'],
+      answer: 0,
+      hint: 'Lado = √400 = 20 cm. Perímetro = 4 × lado',
+      explanation: 'Lado = √400 = 20 cm. P = 4 × 20 = 80 cm.',
+    },
+    {
+      id: 'c200b', points: 200,
+      question: 'Un sartén circular tiene diámetro de 28 cm. ¿Cuánto mide su circunferencia? (π ≈ 3.14)',
+      context: '🍳 El chef quiere saber la longitud del borde del sartén circular',
+      options: ['87.92 cm', '43.96 cm', '175.84 cm', '61.54 cm'],
+      answer: 0,
+      hint: 'C = π × diámetro = 3.14 × 28',
+      explanation: 'C = 3.14 × 28 = 87.92 cm de circunferencia.',
+    },
+    {
+      id: 'c200c', points: 200,
+      question: 'Una bandeja rectangular tiene perímetro de 100 cm y largo de 35 cm. ¿Cuánto mide de ancho?',
+      context: '🍳 Conocemos el perímetro total y el largo. Debemos despejar el ancho',
+      options: ['15 cm', '65 cm', '30 cm', '50 cm'],
+      answer: 0,
+      hint: 'P = 2×(L+A) → 100 = 2×(35+A) → 50 = 35+A → A = ?',
+      explanation: '100 = 2×(35+A) → 50 = 35+A → A = 15 cm.',
+    },
+    {
+      id: 'c200d', points: 200,
+      question: 'Dos bandejas cuadradas de 20 cm×20 cm se juntan por un lado de 20 cm. ¿Cuánto mide el perímetro exterior del conjunto?',
+      context: '🍳 Al unir dos bandejas se forma un rectángulo. Solo se mide el borde exterior',
+      options: ['120 cm', '160 cm', '80 cm', '40 cm'],
+      answer: 0,
+      hint: 'El conjunto mide 40 cm × 20 cm. P = 2 × (40 + 20)',
+      explanation: 'Conjunto = 40 cm × 20 cm. P = 2 × (40 + 20) = 120 cm.',
+    },
+    {
+      id: 'c200e', points: 200,
+      question: 'Un pastel circular tiene radio de 12 cm. ¿Cuánto mide su área? (π ≈ 3.14)',
+      context: '🎂 El pastelero necesita saber cuánta cobertura de fondant usar en la superficie',
+      options: ['452.16 cm²', '75.36 cm', '226.08 cm²', '904.32 cm²'],
+      answer: 0,
+      hint: 'Área = π × r² = 3.14 × 12²',
+      explanation: 'Área = 3.14 × 144 = 452.16 cm² de superficie.',
+    },
+  ],
+  300: [
+    {
+      id: 'c300a', points: 300,
+      question: 'Un molde rectangular: el largo es el doble del ancho. Si el perímetro es 84 cm, ¿cuánto mide el largo?',
+      context: '🧁 Conocemos la relación largo/ancho y el perímetro. Despejamos el largo',
+      options: ['28 cm', '14 cm', '42 cm', '56 cm'],
+      answer: 0,
+      hint: 'Si ancho = x, largo = 2x. P: 2×(x+2x)=84 → 6x=84 → x=14. Largo = 2×14',
+      explanation: 'Ancho = 14 cm, Largo = 28 cm. Verifica: P = 2×(14+28) = 84 cm ✓',
+    },
+    {
+      id: 'c300b', points: 300,
+      question: 'Una base de torta semicircular tiene radio de 15 cm. ¿Cuál es su área? (π ≈ 3.14)',
+      context: '🎂 Las tartas semicirculares son tendencia en repostería. El área es la mitad del círculo completo',
+      options: ['353.25 cm²', '706.5 cm²', '47.1 cm', '176.63 cm²'],
+      answer: 0,
+      hint: 'Área del semicírculo = (π × r²) ÷ 2 = (3.14 × 15²) ÷ 2',
+      explanation: 'A = (3.14 × 225) ÷ 2 = 706.5 ÷ 2 = 353.25 cm².',
+    },
+    {
+      id: 'c300c', points: 300,
+      question: 'Una pizza tiene diámetro de 40 cm. ¿Cuánto mide su área? (π ≈ 3.14)',
+      context: '🍕 ¡La pizza más grande del restaurante! Calculamos su superficie total',
+      options: ['1,256 cm²', '125.6 cm', '3,140 cm²', '628 cm²'],
+      answer: 0,
+      hint: 'Radio = 40÷2 = 20 cm. Área = π × r² = 3.14 × 20²',
+      explanation: 'r = 20 cm. Área = 3.14 × 400 = 1,256 cm² de pizza.',
+    },
+    {
+      id: 'c300d', points: 300,
+      question: 'Tienes cinta para decorar: un pastel cuadrado de 20 cm de lado y uno circular de radio 10 cm. ¿Cuántos cm de cinta necesitas en total? (π ≈ 3.14)',
+      context: '🎂 Necesitas decorar el borde de ambos pasteles con una cinta continua',
+      options: ['142.8 cm', '80 cm', '62.8 cm', '205.6 cm'],
+      answer: 0,
+      hint: 'P_cuadrado = 4×20 = 80 cm. C_círculo = 2×3.14×10 = 62.8 cm. Total = 80 + 62.8',
+      explanation: 'P = 80 cm + C = 62.8 cm. Total = 142.8 cm de cinta.',
+    },
+    {
+      id: 'c300e', points: 300,
+      question: 'Una bandeja triangular tiene lados de 25 cm, 30 cm y 35 cm. ¿Cuántos cm de decoración necesita para rodear su borde?',
+      context: '🎨 Las bandejas triangulares son originales para presentar postres',
+      options: ['90 cm', '60 cm', '45 cm', '120 cm'],
+      answer: 0,
+      hint: 'Perímetro del triángulo = suma de los 3 lados: 25 + 30 + 35',
+      explanation: 'P = 25 + 30 + 35 = 90 cm de decoración.',
+    },
+  ],
+  400: [
+    {
+      id: 'c400a', points: 400,
+      question: 'Un restaurante decora el borde de una pizza. La pizza tiene área de 706.5 cm². ¿Cuántos cm mide el borde? (π ≈ 3.14)',
+      context: '🍕 Conocemos el área de la pizza circular. Debemos hallar su circunferencia (borde)',
+      options: ['94.2 cm', '47.1 cm', '188.4 cm', '706.5 cm'],
+      answer: 0,
+      hint: 'Área = πr² → 706.5 = 3.14×r² → r² = 225 → r = 15 cm. Borde = 2×π×r',
+      explanation: 'r = 15 cm. Borde = 2 × 3.14 × 15 = 94.2 cm.',
+    },
+    {
+      id: 'c400b', points: 400,
+      question: 'Una bandeja rectangular: el largo es el triple del ancho. Si el área es 1,200 cm², ¿cuánto mide el perímetro?',
+      context: '🍳 Conocemos la relación largo/ancho y el área. Hallamos dimensiones y luego el perímetro',
+      options: ['160 cm', '80 cm', '240 cm', '320 cm'],
+      answer: 0,
+      hint: 'largo = 3×ancho. Área = 3×ancho² = 1,200 → ancho² = 400 → ancho = 20 cm, largo = 60 cm',
+      explanation: 'ancho=20 cm, largo=60 cm. P = 2×(60+20) = 160 cm.',
+    },
+    {
+      id: 'c400c', points: 400,
+      question: 'Dos pasteles circulares: uno con radio 8 cm y otro con radio 12 cm. ¿Cuánto mide el área total de ambos? (π ≈ 3.14)',
+      context: '🎂 El pastelero necesita calcular el fondant total para cubrir ambos pasteles',
+      options: ['653.12 cm²', '200.96 cm²', '452.16 cm²', '1,306.24 cm²'],
+      answer: 0,
+      hint: 'A₁ = 3.14×8² = 3.14×64. A₂ = 3.14×12² = 3.14×144. Total = A₁ + A₂',
+      explanation: 'A₁ = 200.96 cm². A₂ = 452.16 cm². Total = 653.12 cm² de fondant.',
+    },
+    {
+      id: 'c400d', points: 400,
+      question: 'Una bandeja cuadrada tiene perímetro de 120 cm. ¿Cuánto mide su área?',
+      context: '🍳 Conocemos el perímetro de la bandeja cuadrada. Hallamos el lado y luego el área',
+      options: ['900 cm²', '30 cm', '1,800 cm²', '3,600 cm²'],
+      answer: 0,
+      hint: 'Lado = P ÷ 4 = 120 ÷ 4 = 30 cm. Área = lado²',
+      explanation: 'Lado = 30 cm. Área = 30² = 900 cm².',
+    },
+    {
+      id: 'c400e', points: 400,
+      question: 'Un molde rectangular tiene largo de (2x+5) cm y ancho de (x+3) cm. Si x = 5, ¿cuánto mide el perímetro?',
+      context: '🧁 Las medidas del molde están expresadas con una variable. Sustituimos x para hallar el perímetro',
+      options: ['46 cm', '23 cm', '92 cm', '40 cm'],
+      answer: 0,
+      hint: 'Sustituye x=5: largo = 2×5+5 = 15 cm, ancho = 5+3 = 8 cm. P = 2×(15+8)',
+      explanation: 'largo = 15 cm, ancho = 8 cm. P = 2 × (15+8) = 46 cm.',
+    },
+  ],
+  500: [
+    {
+      id: 'c500a', points: 500,
+      question: 'Una pizza circular tiene área de 1,256 cm². ¿Cuántos cm mide su borde para decorar? (π ≈ 3.14)',
+      context: '🍕 El chef decora el borde de su pizza estrella. Del área calcula la circunferencia',
+      options: ['125.6 cm', '62.8 cm', '251.2 cm', '400 cm'],
+      answer: 0,
+      hint: 'Área = πr² → r² = 1,256÷3.14 = 400 → r = 20 cm. Borde = 2×π×r',
+      explanation: 'r = 20 cm. Borde = 2 × 3.14 × 20 = 125.6 cm.',
+    },
+    {
+      id: 'c500b', points: 500,
+      question: 'Una cocina tiene zona circular (radio 2 m) y zona rectangular (6 m×4 m). ¿Cuánto mide el área total? (π ≈ 3.14)',
+      context: '🏠 La cocina combina una isla circular y una zona de trabajo rectangular',
+      options: ['36.56 m²', '24 m²', '12.56 m²', '48 m²'],
+      answer: 0,
+      hint: 'A_circular = π×2² = 3.14×4 = 12.56 m². A_rect = 6×4 = 24 m². Total = ?',
+      explanation: 'A_circ = 12.56 m² + A_rect = 24 m² = 36.56 m² de área total.',
+    },
+    {
+      id: 'c500c', points: 500,
+      question: 'Un chef forra el fondo circular (radio 10 cm) con papel ($5 por 100 cm²) y decora el borde con chocolate ($2 por cm). ¿Cuánto gasta en total? (π ≈ 3.14)',
+      context: '🎂 El chef calcula el costo real de decorar un molde circular de alta gama',
+      options: ['$141.30', '$125.60', '$15.70', '$282.60'],
+      answer: 0,
+      hint: 'A = 3.14×100 = 314 cm². Papel = (314÷100)×$5. C = 62.8 cm. Chocolate = 62.8×$2. Suma',
+      explanation: 'Papel: 3.14×$5 = $15.70. Chocolate: 62.8×$2 = $125.60. Total = $141.30.',
+    },
+    {
+      id: 'c500d', points: 500,
+      question: 'Una bandeja semicircular tiene radio de 20 cm. ¿Cuánto mide su perímetro total (borde recto + borde curvo)? (π ≈ 3.14)',
+      context: '🍳 Las bandejas semicirculares se usan para presentar quesos. Su borde tiene dos partes',
+      options: ['102.8 cm', '62.8 cm', '125.6 cm', '82.8 cm'],
+      answer: 0,
+      hint: 'Borde curvo (semicircunferencia) = π×r = 3.14×20 = 62.8 cm. Borde recto (diámetro) = 2×r = 40 cm',
+      explanation: 'Semicircunferencia = 62.8 cm. Diámetro = 40 cm. Perímetro total = 62.8 + 40 = 102.8 cm.',
+    },
+    {
+      id: 'c500e', points: 500,
+      question: 'Un restaurante tiene 3 mesas circulares (radio 60 cm) y 4 mesas cuadradas (lado 80 cm). ¿Cuántos cm² de mantel necesitan en total? (π ≈ 3.14)',
+      context: '🍽️ El administrador del restaurante calcula la tela necesaria para todos los manteles',
+      options: ['59,512 cm²', '33,912 cm²', '25,600 cm²', '47,824 cm²'],
+      answer: 0,
+      hint: 'Mesas circulares: 3×(3.14×60²) = 3×11,304. Mesas cuadradas: 4×(80²) = 4×6,400. Suma',
+      explanation: '3 mesas circ: 3×11,304 = 33,912 cm². 4 mesas cuad: 4×6,400 = 25,600 cm². Total = 59,512 cm².',
+    },
+  ],
+};
+
+// Pool de preguntas por valor (5 existentes + 5 nuevas = 10 por valor)
+export const questionPool = (() => {
+  const vals = [100, 200, 300, 400, 500];
+  return Object.fromEntries(vals.map(pts => [
+    pts,
+    [
+      ...categories.flatMap(c => c.questions.filter(q => q.points === pts)),
+      ...extraQuestionsCocina[pts],
+    ],
+  ]));
+})();
+
+function shuffleCocina(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const CAT_COLORS_C = [
+  '#C62828', '#1565C0', '#E65100', '#6A1B9A', '#00695C',
+  '#2E7D32', '#AD1457', '#F57F17', '#0D47A1', '#37474F',
+];
+
+// Construye las categorías del tablero según el número de equipos.
+// Selecciona el menor múltiplo de numTeams que sea ≥ 5 y ≤ tamaño del pool.
+export function buildGameCategoriesCocina(numTeams) {
+  const POINT_VALUES = [100, 200, 300, 400, 500];
+  const poolSize = Math.min(...POINT_VALUES.map(pts => questionPool[pts].length));
+  const numCols = Math.min(Math.ceil(5 / numTeams) * numTeams, poolSize);
+
+  const selected = {};
+  for (const pts of POINT_VALUES) {
+    selected[pts] = shuffleCocina([...questionPool[pts]]).slice(0, numCols);
+  }
+
+  return Array.from({ length: numCols }, (_, i) => ({
+    id: `slot-${i}`,
+    name: String.fromCharCode(65 + i),
+    color: CAT_COLORS_C[i % CAT_COLORS_C.length],
+    type: 'pool',
+    questions: POINT_VALUES.map(pts => selected[pts][i]),
+  }));
+}

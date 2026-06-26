@@ -27,6 +27,19 @@ const courses = [
     bg: '#f1f8f1',
     students: 25,
   },
+  {
+    id: 'sst',
+    path: '/sst',
+    manual: null,
+    emoji: '🦺',
+    title: 'SST — Sector Pecuario',
+    subject: 'Seguridad y Salud en el Trabajo',
+    description: 'Normativa colombiana, manejo seguro de cargas y animales, medicamentos veterinarios, zoonosis y EPP en el sector pecuario.',
+    tags: ['Normativa', 'Riesgos', 'Zoonosis'],
+    color: '#E65100',
+    bg: '#fff8f5',
+    students: 25,
+  },
 ];
 
 export default function Landing() {
@@ -100,15 +113,17 @@ export default function Landing() {
               <div className="course-card-footer">
                 <span className="course-students">👥 {course.students} estudiantes</span>
                 <div className="course-card-actions">
-                  <a
-                    href={course.manual}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="course-btn course-btn-outline"
-                    style={{ color: course.color, borderColor: course.color }}
-                  >
-                    📄 Manual
-                  </a>
+                  {course.manual && (
+                    <a
+                      href={course.manual}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="course-btn course-btn-outline"
+                      style={{ color: course.color, borderColor: course.color }}
+                    >
+                      📄 Manual
+                    </a>
+                  )}
                   <button
                     className="course-btn"
                     style={{ background: course.color }}

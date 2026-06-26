@@ -1296,6 +1296,21 @@ body {
   color: #C8E6C9 !important;
 }
 
+/* ===== SST THEME ===== */
+.sst-header {
+  background: linear-gradient(135deg, #E65100 0%, #BF360C 100%) !important;
+  box-shadow: 0 4px 12px rgba(191, 54, 12, 0.4) !important;
+}
+
+.sst-marquee {
+  background: #BF360C !important;
+  border-bottom-color: #E64A19 !important;
+}
+
+.sst-marquee .marquee-text {
+  color: #FFCCBC !important;
+}
+
 /* ===== LANDING PAGE ===== */
 .landing-wrapper {
   min-height: 100vh;

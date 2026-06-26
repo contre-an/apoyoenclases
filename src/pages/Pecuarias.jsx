@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { categoriesPecuarias, TOTAL_QUESTIONS_PECUARIAS } from '../data/questionsPecuarias';
+import { buildGameCategoriesPecuarias } from '../data/questionsPecuarias';
 import SetupScreen from '../components/SetupScreen';
 import GameBoard from '../components/GameBoard';
 import QuestionModal from '../components/QuestionModal';
@@ -16,6 +16,7 @@ export default function Pecuarias() {
   const navigate = useNavigate();
   const [phase, setPhase] = useState('setup');
   const [teams, setTeams] = useState([]);
+  const [gameCategories, setGameCategories] = useState([]);
   const [currentTeamIndex, setCurrentTeamIndex] = useState(0);
   const [usedQuestions, setUsedQuestions] = useState(new Set());
   const [activeQuestion, setActiveQuestion] = useState(null);
@@ -23,6 +24,7 @@ export default function Pecuarias() {
 
   const startGame = (teamData) => {
     setTeams(teamData.map((t, i) => ({ ...t, score: 0, color: TEAM_COLORS[i % TEAM_COLORS.length], lifelines: MAX_LIFELINES })));
+    setGameCategories(buildGameCategoriesPecuarias(teamData.length));
     setCurrentTeamIndex(0);
     setUsedQuestions(new Set());
     setActiveQuestion(null);
@@ -53,7 +55,7 @@ export default function Pecuarias() {
   };
 
   const continueGame = () => {
-    if (usedQuestions.size >= TOTAL_QUESTIONS_PECUARIAS) {
+    if (usedQuestions.size >= gameCategories.length * 5) {
       setPhase('final');
       setActiveQuestion(null);
       setQuestionResult(null);
@@ -67,6 +69,7 @@ export default function Pecuarias() {
   const resetGame = () => {
     setPhase('setup');
     setTeams([]);
+    setGameCategories([]);
     setCurrentTeamIndex(0);
     setUsedQuestions(new Set());
     setActiveQuestion(null);
@@ -107,7 +110,7 @@ export default function Pecuarias() {
         />
       )}
       {phase === 'game' && (
-        <GameBoard categories={categoriesPecuarias} usedQuestions={usedQuestions} teams={teams} currentTeamIndex={currentTeamIndex} onSelectQuestion={selectQuestion} onReset={resetGame} />
+        <GameBoard categories={gameCategories} usedQuestions={usedQuestions} teams={teams} currentTeamIndex={currentTeamIndex} onSelectQuestion={selectQuestion} onReset={resetGame} />
       )}
       {phase === 'final' && <FinalScreen teams={teams} onReset={resetGame} />}
       {activeQuestion && (

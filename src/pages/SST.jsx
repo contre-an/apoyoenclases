@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { buildGameCategoriesCocina } from '../data/questions';
+import { buildGameCategoriesSST } from '../data/questionsSST';
 import SetupScreen from '../components/SetupScreen';
 import GameBoard from '../components/GameBoard';
 import QuestionModal from '../components/QuestionModal';
@@ -12,7 +12,7 @@ const TEAM_COLORS = [
 ];
 const MAX_LIFELINES = 2;
 
-export default function Cocina() {
+export default function SST() {
   const navigate = useNavigate();
   const [phase, setPhase] = useState('setup');
   const [teams, setTeams] = useState([]);
@@ -24,7 +24,7 @@ export default function Cocina() {
 
   const startGame = (teamData) => {
     setTeams(teamData.map((t, i) => ({ ...t, score: 0, color: TEAM_COLORS[i % TEAM_COLORS.length], lifelines: MAX_LIFELINES })));
-    setGameCategories(buildGameCategoriesCocina(teamData.length));
+    setGameCategories(buildGameCategoriesSST(teamData.length));
     setCurrentTeamIndex(0);
     setUsedQuestions(new Set());
     setActiveQuestion(null);
@@ -77,23 +77,38 @@ export default function Cocina() {
   };
 
   return (
-    <div>
-      <header className="app-header">
+    <div className="sst-theme">
+      <header className="app-header sst-header">
         <button className="back-btn" onClick={() => navigate('/')}>← Volver</button>
-        <h1>🍳 Perímetros y Áreas en la Cocina</h1>
-        <p>Matemáticas deliciosas — Aprende geometría con sabor</p>
+        <h1>🦺 Seguridad y Salud en el Trabajo — Sector Pecuario</h1>
+        <p>Normativa colombiana · Manejo seguro de cargas y animales · Zoonosis y EPP</p>
       </header>
 
-      <div className="marquee-wrapper">
+      <div className="marquee-wrapper sst-marquee">
         <span className="marquee-text">
-          ⭐ Instructor: Carlos Contreras &nbsp;&nbsp;·&nbsp;&nbsp; Matemáticas &nbsp;&nbsp;·&nbsp;&nbsp;
-          📐 Perímetros y Áreas &nbsp;&nbsp;·&nbsp;&nbsp; ¡Aprendamos juntos! &nbsp;&nbsp;·&nbsp;&nbsp;
-          ⭐ Instructor: Carlos Contreras &nbsp;&nbsp;·&nbsp;&nbsp; Matemáticas &nbsp;&nbsp;·&nbsp;&nbsp;
-          📐 Perímetros y Áreas &nbsp;&nbsp;·&nbsp;&nbsp; ¡Aprendamos juntos! &nbsp;&nbsp;·&nbsp;&nbsp;
+          🏛️ Decreto 1072/2015 · SG-SST &nbsp;·&nbsp; 📋 Resolución 0312/2019 &nbsp;·&nbsp;
+          💪 Resolución 2400/1979 · Cargas &nbsp;·&nbsp; 🐄 Temple Grandin · Manejo Animal &nbsp;·&nbsp;
+          💉 Micotil 300 · Riesgo Cardiovascular &nbsp;·&nbsp; 🦠 GTC-45 · Matriz de Peligros &nbsp;·&nbsp;
+          📐 Instructor: Carlos Contreras &nbsp;·&nbsp;
+          🏛️ Decreto 1072/2015 · SG-SST &nbsp;·&nbsp; 📋 Resolución 0312/2019 &nbsp;·&nbsp;
+          💪 Resolución 2400/1979 · Cargas &nbsp;·&nbsp; 🐄 Temple Grandin · Manejo Animal &nbsp;·&nbsp;
+          💉 Micotil 300 · Riesgo Cardiovascular &nbsp;·&nbsp; 🦠 GTC-45 · Matriz de Peligros &nbsp;·&nbsp;
+          📐 Instructor: Carlos Contreras &nbsp;·&nbsp;
         </span>
       </div>
 
-      {phase === 'setup' && <SetupScreen onStart={startGame} teamColors={TEAM_COLORS} maxLifelines={MAX_LIFELINES} />}
+      {phase === 'setup' && (
+        <SetupScreen
+          onStart={startGame}
+          teamColors={TEAM_COLORS}
+          maxLifelines={MAX_LIFELINES}
+          theme={{
+            icon: '🦺',
+            title: 'Configura los Equipos',
+            teamPlaceholder: (i) => `Ej: Equipo SST ${i + 1}`,
+          }}
+        />
+      )}
       {phase === 'game' && (
         <GameBoard categories={gameCategories} usedQuestions={usedQuestions} teams={teams} currentTeamIndex={currentTeamIndex} onSelectQuestion={selectQuestion} onReset={resetGame} />
       )}

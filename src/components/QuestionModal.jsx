@@ -51,7 +51,7 @@ export default function QuestionModal({
   currentTeam, teams, result,
   onAnswer, onUseLifeline, onContinue,
 }) {
-  const totalTime = useMemo(() => getTimerSeconds(question.points), [question.id]);
+  const totalTime = useMemo(() => question.timerOverride ?? getTimerSeconds(question.points), [question.id]);
   const [timeLeft, setTimeLeft] = useState(totalTime);
   const [paused, setPaused] = useState(false);
   const [hiddenOptions, setHiddenOptions] = useState(new Set());
